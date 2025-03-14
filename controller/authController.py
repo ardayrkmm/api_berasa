@@ -6,7 +6,16 @@ from flask_mail import Message
 from flask_jwt_extended import create_access_token
 from app import bcrypt, db, mail
 from models.usersModel import User
+from werkzeug.utils import secure_filename
+import os
+UPLOAD_FOLDER = 'static/profil'
+ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
 
+if not os.path.exists(UPLOAD_FOLDER):
+    os.makedirs(UPLOAD_FOLDER)
+
+def allowed_file(filename):
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 def register():
     data = request.get_json()
@@ -119,3 +128,30 @@ def ubahPassword():
         return jsonify({"message": "Password berhasil direset, silakan login"}), 200
     
     return jsonify({"message": "Kode salah!"}), 400
+
+
+
+
+def update_user(user):
+    data = request.form
+
+    if "nama" in data:
+        user.nama = data["nama"]
+    if "email" in data:
+        user.email = data["email"]
+    if "nomer_telepon" in data:
+        user.nomer_telepon = data["nomer_telepon"]
+    if "alamat" in data:
+        user.alamat = data["alamat"]
+
+  
+    if 'img_profil' in request.files:
+        file = request.files['img_profil']
+        if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            filepath = os.path.join(UPLOAD_FOLDER, filename)
+            file.save(filepath)
+            user.img_profil = filename  
+
+    db.session.commit()
+    return jsonify({"message": "Profil berhasil diperbarui"}), 200

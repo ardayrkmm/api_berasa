@@ -4,23 +4,23 @@ from datetime import datetime
 from app import db
 from models.jenisModel import JenisMakanan
 
-from models.DonasiModel import Donasi  # Import model Donasi
-from models.barang_donasi_model import BarangDonasi  # Import model BarangDonasi
-from models.GaleriMakananModel import GaleriMakanan  # Import model GaleriMakanan
+from models.DonasiModel import Donasi 
+from models.barang_donasi_model import BarangDonasi  
+from models.GaleriMakananModel import GaleriMakanan 
 
-SECRET_KEY = "modriks"  # Ganti dengan secret key yang aman
+SECRET_KEY = "modriks"  
 
 def get_current_user():
     auth_header = request.headers.get("Authorization")
-    print("Auth Header:", auth_header)  # Debugging
+    print("Auth Header:", auth_header) 
 
     if not auth_header:
         return None
 
     try:
-        token = auth_header.split(" ")[1]  # Format: "Bearer <TOKEN>"
+        token = auth_header.split(" ")[1]  
         decoded_token = jwt.decode(token, SECRET_KEY, algorithms=["HS256"])
-        print("Decoded Token:", decoded_token)  # Debugging
+        print("Decoded Token:", decoded_token) 
         return decoded_token.get("sub")
     except jwt.ExpiredSignatureError:
         print("JWT Error: Token Expired")
