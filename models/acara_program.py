@@ -13,4 +13,12 @@ def acakid():
 
 class AcaraProgram(db.Model):
     id_program = db.Column(db.String(3), primary_key=True, default=acakid)
-    nama_program = db.Column(db.String(255), nullable=False)
+    judul = db.Column(db.String(255), nullable=False)
+    deskripsi = db.Column(db.Text, nullable=False)
+    total_donasi = db.Column(db.BigInteger, default=0)
+    alamat = db.Column(db.String(250))
+    tanggal = db.Column(db.Date)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+    deleted_at = db.Column(db.DateTime, nullable=True)
+    
