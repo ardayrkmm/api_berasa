@@ -12,8 +12,8 @@ def acakid():
 
 
 class GaleriMakanan(db.Model):
-    id_galerimakanan = db.Column(db.String(36), primary_key=True, default=acakid)
+    id_galerimakanan = db.Column(db.String(3), primary_key=True, default=acakid)
     url = db.Column(db.String(255), nullable=False)
-    id_barang = db.Column(db.String(36), db.ForeignKey('barang_donasi.id_barang_donasi'), nullable=False)
+    id_barang = db.Column(db.String(3), db.ForeignKey('barang_donasi.id_barang_donasi'), nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)

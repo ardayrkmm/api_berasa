@@ -3,7 +3,7 @@ import random
 from flask_bcrypt import generate_password_hash
 from flask import jsonify, request
 from flask_mail import Message
-from flask_jwt_extended import create_access_token
+from flask_jwt_extended import create_access_token, get_jwt_identity, jwt_required
 from app import bcrypt, db, mail
 from models.usersModel import User
 from werkzeug.utils import secure_filename
@@ -55,11 +55,11 @@ def login():
     data = request.get_json()
     user = User.query.filter_by(email=data['email']).first()
 
-    if user and bcrypt.check_password_hash(user.password,data['password']):
+    if user and bcrypt.check_password_hash(user.password, data['password']):
         if not user.is_verified:
             return jsonify({"message": "Akun belum diverifikasi!, silahkan verifikasi dahulu ya"}), 403
         
-        token = create_access_token(identity=user.id)
+        token = create_access_token(identity=user.id, expires_delta=timedelta(weeks=1))  # Token berlaku 7 hari
         return jsonify({"token": token, "user": user.ubahKejson()}), 200
     
     return jsonify({"message": "Email atau password salah!"}), 401
@@ -88,7 +88,7 @@ def MintaRequestReset():
     if user:
         reset_code = str(random.randint(100000, 999999))
         user.verification_code = reset_code
-        user.verification_expiry = datetime.utcnow() + datetime.timedelta(minutes=5)  # Kode valid 5 menit
+        user.verification_expiry = datetime.utcnow() + timedelta(minutes=5)  # Kode valid 5 menit
         db.session.commit()
 
         msg = Message("Reset Password Code", sender="emailkamu@gmail.com", recipients=[data["email"]])
@@ -131,9 +131,11 @@ def ubahPassword():
 
 
 
-
-def update_user(user):
+@jwt_required()
+def update_user():
     data = request.form
+    user_id = get_jwt_identity()  # Ambil user ID dari token JWT
+    user = User.query.get(user_id)
 
     if "nama" in data:
         user.nama = data["nama"]

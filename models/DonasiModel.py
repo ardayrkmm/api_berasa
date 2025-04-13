@@ -19,8 +19,11 @@ class Donasi(db.Model):
     nama = db.Column(db.String(255), nullable=False)
     status = db.Column(db.String(255), nullable=False)
     deskripsi = db.Column(db.String(255), nullable=False)
+    alamat = db.Column(db.String(255), nullable=False)
     tanggal = db.Column(db.DateTime, default=func.now(), nullable=False)
-
+    latitude = db.Column(db.Text, nullable=True)
+    longitude = db.Column(db.Text, nullable=True)
+    tanggal = db.Column(db.DateTime, default=datetime.utcnow)
     id_user = db.Column(db.String(3), db.ForeignKey("user.id"), nullable=False)
     id_program = db.Column(db.String(3), db.ForeignKey("acara_program.id_program"), nullable=True)
     id_penerima = db.Column(db.String(3), db.ForeignKey("penerima_donasi.id_penerima"), nullable=True)
