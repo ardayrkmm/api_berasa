@@ -1,53 +1,53 @@
-# ⚙️ Berasa API - Backend System
+# ⚙️ Berasa API – Backend System
 
-**Berasa API** adalah sistem backend berbasis RESTful API yang mengelola seluruh logika bisnis dan data untuk aplikasi **Berasa (Berbagi Rasa)**. Dibangun menggunakan framework Flask, API ini bertanggung jawab atas manajemen pengguna, pengolahan data donasi, tracking transparansi, dan kalkulasi lokasi terdekat.
-
----
-
-## ✨ Fitur Backend
-
-* **🔐 Authentication & Authorization**: Sistem login dan manajemen hak akses menggunakan JWT (JSON Web Token).
-* **📦 Donation Management**: Endpoint untuk membuat, memperbarui, dan mengelola status donasi makanan.
-* **🕵️ Transparency Tracking**: Sistem pencatatan riwayat (log) setiap perubahan status donasi untuk menjamin akuntabilitas.
-* **📍 Geolocation Service**: Endpoint untuk menghitung jarak antara lokasi donatur dengan titik penerima donasi terdekat menggunakan rumus *Haversine*.
-* **📊 Data Reporting**: Menyediakan data statistik donasi yang berhasil tersalurkan.
+**Berasa API** is a RESTful backend system that manages all business logic and data for the **Berasa (Berbagi Rasa)** application. Built using the Flask framework, this API is responsible for user management, donation data processing, transparency tracking, and nearest-location calculations.
 
 ---
 
-## 🛠️ Teknologi yang Digunakan
+## ✨ Backend Features
+
+* **🔐 Authentication & Authorization**: Login system and access control using JWT (JSON Web Token).
+* **📦 Donation Management**: Endpoints to create, update, and manage the status of food donations.
+* **🕵️ Transparency Tracking**: A logging system that records every change in donation status to ensure accountability.
+* **📍 Geolocation Service**: Endpoints to calculate the distance between donor locations and the nearest donation recipient points using the *Haversine* formula.
+* **📊 Data Reporting**: Provides statistical data on successfully distributed donations.
+
+---
+
+## 🛠️ Technologies Used
 
 * **Language**: [Python](https://www.python.org/)
 * **Framework**: [Flask](https://flask.palletsprojects.com/)
 * **Database**: MySQL / PostgreSQL
-* **ORM**: [Flask-SQLAlchemy](https://flask-sqlalchemy.palletsprojects.com/) (Untuk manajemen database)
+* **ORM**: [Flask-SQLAlchemy](https://flask-sqlalchemy.palletsprojects.com/) (For database management)
 * **Authentication**: PyJWT
 * **Documentation**: Postman / Swagger
 
 ---
 
-## 🚀 Cara Menjalankan API Secara Lokal
+## 🚀 How to Run the API Locally
 
-1.  **Clone repository**:
+1. **Clone the repository**:
     ```bash
-    git clone [https://github.com/ardayrkmm/berasa-api.git](https://github.com/ardayrkmm/berasa-api.git)
+    git clone https://github.com/ardayrkmm/berasa-api.git
     ```
-2.  **Masuk ke folder proyek**:
+2. **Navigate to the project folder**:
     ```bash
     cd berasa-api
     ```
-3.  **Buat Virtual Environment**:
+3. **Create a Virtual Environment**:
     ```bash
     python -m venv venv
     source venv/bin/activate  # Linux/Mac
     venv\Scripts\activate     # Windows
     ```
-4.  **Install dependencies**:
+4. **Install dependencies**:
     ```bash
     pip install -r requirements.txt
     ```
-5.  **Konfigurasi Database**:
-    Sesuaikan `config.py` atau `.env` dengan kredensial database Anda.
-6.  **Jalankan API**:
+5. **Database Configuration**:
+    Adjust `config.py` or `.env` with your database credentials.
+6. **Run the API**:
     ```bash
     python app.py
     ```
@@ -56,7 +56,7 @@
 
 ## 👤 Developer
 
-Proyek backend ini dikembangkan sepenuhnya secara mandiri oleh:
+This backend project was fully developed independently by:
 
 <table>
   <tr>
@@ -71,14 +71,14 @@ Proyek backend ini dikembangkan sepenuhnya secara mandiri oleh:
 
 ---
 
-## 🎯 Tujuan Pengembangan
+## 🎯 Development Objectives
 
-* Membangun sistem backend yang scalable untuk mendukung aplikasi mobile Berasa.
-* Memastikan keamanan data donatur dan penerima donasi.
-* Mengimplementasikan REST API yang rapi sesuai standar industri.
+* Build a scalable backend system to support the Berasa mobile application.
+* Ensure data security for donors and donation recipients.
+* Implement a clean, industry-standard REST API.
 
 ---
 
-## 📄 Lisensi
+## 📄 License
 
-Proyek ini dibuat untuk keperluan **edukasi dan pengembangan**. Penggunaan dan modifikasi diperbolehkan dengan mencantumkan sumber.
+This project was created for **educational and development** purposes. Use and modification are permitted with proper attribution.
